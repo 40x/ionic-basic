@@ -1,0 +1,10 @@
+{
+  "name": "LearningCloud",
+  "app_id": "22e706f8",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "https://kernel.egen.io/api"
+    }
+  ]
+}
