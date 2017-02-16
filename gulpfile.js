@@ -30,6 +30,10 @@ gulp.task('default', ['clean'], function () {
   gulp.start('prepare:browser');
 });
 
+gulp.task('run', ['clean'], function () {
+    gulp.start('prepare:runbrowser');
+});
+
 /**
  *  Default task clean temporaries directories and launch the
  *  main deploy prepare task

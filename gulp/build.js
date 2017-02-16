@@ -114,7 +114,10 @@ gulp.task('ionic', function () {
 });
 
 gulp.task('clean', function (done) {
-    $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
+    $.del([
+        path.join(conf.paths.dist, '/**/*'),
+        path.join( '!' + conf.paths.dist, '/index.html'),
+        path.join(conf.paths.tmp, '/')], done);
 });
 
 gulp.task('html:staging', function(){
@@ -150,3 +153,16 @@ gulp.task('prepare:emulator',function() {
         'other');
 });
 gulp.task('prepare:browser', ['ioconfig', 'html:browser', 'fonts', 'other']);
+
+gulp.task('prepare:runbrowser', function() {
+    runSequence('configInjector:browser',
+        'ioconfig',
+        'scripts:browser',
+        'styles',
+        'inject:browser',
+        'partials',
+        'html:browser',
+        'fonts',
+        'other',
+        'watch');
+});
