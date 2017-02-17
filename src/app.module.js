@@ -5,8 +5,6 @@
         // 3rd party
         'ionic',
         'ionic.cloud',
-        'ionic.service.core', // needed for ionic analytics
-        'ionic.service.analytics',
         'ngCordova',
         'tmh.dynamicLocale',
         'pascalprecht.translate',
@@ -68,10 +66,10 @@
             });
 
         $urlRouterProvider.otherwise(function ($injector, $location) {
-            var user = false;
             var state = $injector.get('$state');
-            if (user) {
-                // go to home
+            var user = $injector.get('$ionicUser');
+            if (user.id) {
+                state.go('app.home.dashboard', { registerForPush: true });
             } else {
                 state.go('app.login');
             }
@@ -80,7 +78,7 @@
     }
 
     // @ngInject
-    function ionicConfig($ionicConfigProvider, $provide, $ionicAutoTrackProvider,
+    function ionicConfig($ionicConfigProvider, $provide,
                          CONFIG, $cordovaInAppBrowserProvider) {
         $provide.decorator('$exceptionHandler', ['$delegate', '$window', function ($delegate, $window) {
             return function (exception, cause) {
@@ -100,7 +98,7 @@
 
         if (CONFIG.devMode) {
             console.info('Analytics tracking is disabled in dev mode, update package.json to enable tracking');
-            $ionicAutoTrackProvider.disableTracking();
+            // enable once its available on ionic
         }
 
         $cordovaInAppBrowserProvider.setDefaultOptions({

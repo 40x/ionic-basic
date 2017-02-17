@@ -5,7 +5,13 @@
         .controller('HomeController', HomeController);
 
     // @ngInject
-    function HomeController() {
+    function HomeController(AuthService, $stateParams) {
         var hVm = this;
+
+        if($stateParams.registerForPush) {
+            // if the root state is being reloaded (i.e after login or app restart),
+            // register for push again
+            AuthService.registerForPushNotifications();
+        }
     }
 }(angular));

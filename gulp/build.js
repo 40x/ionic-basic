@@ -132,7 +132,6 @@ gulp.task('html:browser', ['inject:browser', 'partials'], function(){
 
 gulp.task('prepare:staging', function() {
     runSequence('configInjector:staging',
-                'ioconfig',
                 'scripts:staging',
                 'styles',
                 'inject:staging',
@@ -143,7 +142,6 @@ gulp.task('prepare:staging', function() {
 });
 gulp.task('prepare:emulator',function() {
     runSequence('configInjector:emulator',
-        'ioconfig',
         'scripts:emulator',
         'styles',
         'inject:emulator',
@@ -152,11 +150,10 @@ gulp.task('prepare:emulator',function() {
         'fonts',
         'other');
 });
-gulp.task('prepare:browser', ['ioconfig', 'html:browser', 'fonts', 'other']);
+gulp.task('prepare:browser', ['html:browser', 'fonts', 'other']);
 
 gulp.task('prepare:runbrowser', function() {
     runSequence('configInjector:browser',
-        'ioconfig',
         'scripts:browser',
         'styles',
         'inject:browser',
